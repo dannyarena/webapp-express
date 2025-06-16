@@ -20,8 +20,15 @@ db.connect(err => {
     }
 });
 
-app.get('./movies', (req, res) => {
-const sql = 'SELECT * FROM movies';
+app.get('/movies', (req, res) => {
+    const sql = 'SELECT * FROM movies';
+
+    db.query(sql, (err, results) => {
+        if (err) {
+            return res.status(500).json({ error: 'Errore nella query' });
+        }
+        res.json(results);
+    });
 });
 
 app.listen(port, () => {
