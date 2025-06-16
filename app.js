@@ -21,7 +21,7 @@ db.connect(err => {
 });
 
 app.get('./movies', (req, res) => {
-
+const sql = 'SELECT * FROM movies';
 });
 
 app.listen(port, () => {
