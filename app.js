@@ -1,3 +1,10 @@
+const mysql = require('mysql2');
+const express = require('express');
+const app = express();
+require ('dotenv').config();
+const port = 3000;
+app.use(express.json());
+
 const db = mysql.createConnection({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
@@ -13,6 +20,6 @@ db.connect(err => {
     }
 });
 
-application.listen(port, () => {
+app.listen(port, () => {
     console.log(`Server avviato su http://localhost:${port}`)
 });
