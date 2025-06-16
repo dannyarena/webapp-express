@@ -29,7 +29,23 @@ app.get('/movies', (req, res) => {
         }
         res.json(results);
     });
+
 });
+    app.get('/movies/:id', (req, res) => {
+        const movieId = req.params.id;
+        const sql = `
+        SELECT m.*, r.id AS review_id, r.name, r.vote, r.text
+        FROM movies m
+        LEFT JOIN reviews r ON m.id = r.movie_id
+        WHERE m.id = ?
+        `;
+        db.query(sql, [movieId], (err, results) => {
+            if (err) {
+                return res.status(500).json({ error: 'Errore nella query' });
+            }
+            res.json(results);
+        });
+    });
 
 app.listen(port, () => {
     console.log(`Server avviato su http://localhost:${port}`)
