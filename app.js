@@ -20,6 +20,10 @@ db.connect(err => {
     }
 });
 
+app.get('./movies', (req, res) => {
+
+});
+
 app.listen(port, () => {
     console.log(`Server avviato su http://localhost:${port}`)
 });
