@@ -5,7 +5,7 @@ function getAllMovies(req, res) {
 
     db.query(sql, (err, results) => {
         if (err) {
-            return res.status(500).json({ error: 'Errore nella query' });
+            return next(err);
         }
         res.json(results);
     });
