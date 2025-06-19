@@ -60,22 +60,24 @@ function addReview(req, res) {
     VALUES (?, ?, ?, ?)
     `
 
-    db.query(sql, [name, vote, text, movie_id], (err, result) => {
+    db.query(sql, [name, vote, text, movieId], (err, result) => {
+        
+        if (err) {
+            console.error("Errore nell'inserimento;", err);
+            return res.status(500).json({ error: "Errore nel salvataggio"});
+        }
 
-    });
-
-    if (err) {
-        console.error("Errore nell'inserimento;", err);
-        return res.status(500).json({ error: "Errore nel salvataggio"});
-    }
-
-    res.status(201).json({
+        res.status(201).json({
         message: "Recensione salvata con successo",
         insertId: result.insertId
+        
+    });
+    
     });
 }
 
 module.exports = {
     getAllMovies,
-    getMovieById
+    getMovieById,
+    addReview
 };
